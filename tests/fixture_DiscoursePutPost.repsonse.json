@@ -1,0 +1,79 @@
+{
+    "post": {
+        "id": 14,
+        "name": null,
+        "username": "webeire",
+        "avatar_template": "/letter_avatar_proxy/v4/letter/w/d6d6ee/{size}.png",
+        "created_at": "2020-11-27T10:12:29.364Z",
+        "cooked": "<p><blockquote>Propsal submitted, check status here: http://alksdfjl.alsdkfj.alaksdjf</blockquote></p><hr/><p>this is the updated content (Post.Raw)</p><blockquote>This is the blockquote?</blockquote>",
+        "post_number": 1,
+        "post_type": 1,
+        "updated_at": "2020-11-27T19:18:43.076Z",
+        "reply_count": 0,
+        "reply_to_post_number": null,
+        "quote_count": 0,
+        "incoming_link_count": 0,
+        "reads": 1,
+        "readers_count": 0,
+        "score": 0.2,
+        "yours": false,
+        "topic_id": 11,
+        "topic_slug": "once-upon-a-plop",
+        "display_username": null,
+        "primary_group_name": null,
+        "primary_group_flair_url": null,
+        "primary_group_flair_bg_color": null,
+        "primary_group_flair_color": null,
+        "version": 2,
+        "can_edit": true,
+        "can_delete": false,
+        "can_recover": false,
+        "can_wiki": true,
+        "user_title": null,
+        "bookmarked": false,
+        "actions_summary": [
+            {
+                "id": 2,
+                "can_act": true
+            },
+            {
+                "id": 3,
+                "can_act": true
+            },
+            {
+                "id": 4,
+                "can_act": true
+            },
+            {
+                "id": 8,
+                "can_act": true
+            },
+            {
+                "id": 6,
+                "can_act": true
+            },
+            {
+                "id": 7,
+                "can_act": true
+            }
+        ],
+        "moderator": false,
+        "admin": true,
+        "staff": true,
+        "user_id": 1,
+        "draft_sequence": 0,
+        "hidden": false,
+        "trust_level": 1,
+        "deleted_at": null,
+        "user_deleted": false,
+        "edit_reason": null,
+        "can_view_edit_history": true,
+        "wiki": false,
+        "notice": {
+            "type": "new_user"
+        },
+        "reviewable_id": null,
+        "reviewable_score_count": 0,
+        "reviewable_score_pending_count": 0
+    }
+}
