@@ -92,7 +92,7 @@ func (d *Discourse) HandleProposal(p dao.ProposalAdded) error {
 		return err
 	}
 
-	newBody := "<p><blockquote>Propsal submitted, check status here: http://alksdfjl.alsdkfj.alaksdjf</blockquote></p><hr/>" + post.Cooked
+	newBody := "<p><blockquote>Propsal " + p.ID.String() + " submitted</blockquote></p><hr/>" + post.Cooked
 	post.Raw = newBody
 	post.EditReason = "updating with submitted proposal"
 	_, err = d.UpdatePost(post)
