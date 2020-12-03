@@ -22,6 +22,7 @@ type Discourse struct {
 type Post struct {
 	ID         float64 `json:"id"`
 	Raw        string  `json:"raw,omitempty"`
+	RawOld     string  `json:"raw_old,omitempty"`
 	Cooked     string  `json:"cooked,omitempty"`
 	EditReason string  `json:"edit_reason,omitempty"`
 }
@@ -51,6 +52,7 @@ func (d *Discourse) GetPost(url string) (Post, error) {
 
 	var post Post
 
+	log.Printf("Getting post: %s\n", url)
 	req, err := http.NewRequest("GET", url+".json", nil)
 	if err != nil {
 		return post, err
@@ -73,28 +75,39 @@ func (d *Discourse) GetPost(url string) (Post, error) {
 		return post, err
 	}
 
+	if len(postStream.PostStream.Posts) == 0 {
+		return post, fmt.Errorf("No posts found")
+	}
+
 	return postStream.PostStream.Posts[0], nil
 }
 
 // HandleProposal Built to be used as goroutine
-func (d *Discourse) HandleProposal(p chan dao.ProposalAdded) {
+func (d *Discourse) HandleProposal(p dao.ProposalAdded) error {
 
+	log.Printf("Handling proposal: %s\n", p.Link)
 	// 1. when recieve proposal
-	// _p, _ := d.GetPost(p.Link)
-	// _p.Raw = "<p><blockquote>Propsal submitted, check status here: http://alksdfjl.alsdkfj.alaksdjf</blockquote></p><hr/>" + _p.Raw
-	// res, _ := d.UpdatePost(_p)
+	post, err := d.GetPost(string(p.Link))
+	if err != nil {
+		return err
+	}
 
-	// return error
-	// p <-err
+	newBody := "<p><blockquote>Propsal submitted, check status here: http://alksdfjl.alsdkfj.alaksdjf</blockquote></p><hr/>" + post.Cooked
+	post.Raw = newBody
+	post.EditReason = "updating with submitted proposal"
+	_, err = d.UpdatePost(post)
+	if err != nil {
+		log.Fatal(err)
+	}
 
-	// return result
-	// p <-res
+	return nil
 }
 
 // UpdatePost Save changes to a post
 func (d *Discourse) UpdatePost(post Post) (Response, error) {
 
 	var update Response
+	log.Println("updateing post...")
 
 	url := d.endpoint + "/posts/" + fmt.Sprintf("%d", int(post.ID)) + ".json"
 	putBody, err := json.Marshal(post)

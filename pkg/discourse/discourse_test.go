@@ -23,7 +23,7 @@ func TestUpdatePost(t *testing.T) {
 	})
 	underTest := NewDiscourse(
 		"http://example.com",
-		"435947dc08168807254198c9b8701b282e2f8b2722caaef7ae3171900418e18b",
+		"1234",
 		mockClient,
 	)
 
@@ -54,7 +54,7 @@ func TestGetPost(t *testing.T) {
 	})
 	underTest := NewDiscourse(
 		"http://example.com",
-		"435947dc08168807254198c9b8701b282e2f8b2722caaef7ae3171900418e18b",
+		"1234",
 		mockClient,
 	)
 

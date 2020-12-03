@@ -2,12 +2,10 @@ package dao
 
 import (
 	"context"
-	"fmt"
 	"log"
 	"math/big"
 	"strings"
 
-	"github.com/davecgh/go-spew/spew"
 	ethereum "github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/accounts/abi"
 	"github.com/ethereum/go-ethereum/common"
@@ -50,9 +48,6 @@ func ListenNewProposal(contractAddr common.Address, proposal chan ProposalAdded,
 		case err := <-sub.Err():
 			log.Fatal(err)
 		case vLog := <-logs:
-			spew.Dump(vLog)
-			spew.Dump(vLog.Topics)
-			// event, err := contractAbi.Unpack("ProposalAdded", vLog.Data)
 			var event ProposalAdded
 			err = contractAbi.UnpackIntoInterface(&event, "ProposalAdded", vLog.Data)
 			if err != nil {
@@ -60,8 +55,8 @@ func ListenNewProposal(contractAddr common.Address, proposal chan ProposalAdded,
 			}
 			event.Entity = common.HexToAddress(vLog.Topics[1].String())
 			event.ID = big.NewInt(vLog.Topics[2].Big().Int64())
-			spew.Dump(event)
-			fmt.Println(vLog) // pointer to event log
+
+			proposal <- event
 		}
 	}
 }
